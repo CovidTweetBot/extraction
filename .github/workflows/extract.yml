@@ -18,3 +18,5 @@ jobs:
     - name: Check last change
       run: |
         python vacunas2.py
+    - name: Commit and push
+      uses: actions-js/push@master
