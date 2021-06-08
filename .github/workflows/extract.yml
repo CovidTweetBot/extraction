@@ -1,0 +1,23 @@
+name: Check if dataset changed
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out this repo
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Check last change
+      run: |
+        python vacunas2.py
