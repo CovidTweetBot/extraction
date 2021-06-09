@@ -15,9 +15,12 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.6
-    - name: Check last change
+    - name: Install Python dependencies
       run: |
-        python vacunas2.py
+        pip install -r requirements.txt
+    - name: Load dataset only if changes detected
+      run: |
+        python loader.py
     - name: Commit and push
       uses: actions-js/push@master
       with:
