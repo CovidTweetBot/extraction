@@ -16,7 +16,7 @@ class DataLoader:
         self.config = configparser.ConfigParser()
         self.config.read(self.config_file_path)
 
-    def load_source(self, key_name):
+    def load_source(self, key_name, **kwargs):
         assert key_name in self.config, f"source {key_name} is not registered"
         config_section = self.config[key_name]
         url = config_section["url"]
@@ -31,7 +31,7 @@ class DataLoader:
 
         if config_section["LastContentLength"] != content_length:
             print("Changes detected. Loading data into memory...")
-            df = pd.read_csv(rsp)
+            df = pd.read_csv(rsp, **kwargs)
             # save new ContentLength value into the config file
             config_section["LastContentLength"] = content_length
             with open(self.config_file_path, 'w') as config_file:
@@ -43,11 +43,19 @@ class DataLoader:
 
 def main():
     loader = DataLoader("./data/config.ini")
-    data_frame = loader.load_source("vaccinations")
-    if data_frame is None:
-        print("No changes detected")
+    # loading vaccinations
+    df_vaccinations = loader.load_source("vaccinations")
+    if df_vaccinations is None:
+        print("No vaccinations changes detected")
     else:
-        print("Data loaded into memory successfully. Use data_frame variable to access them")
+        print("vaccinations data loaded into memory successfully. Use df_vaccinations variable to access them")
+
+    # loading sinadef
+    df_sinadef = loader.load_source("sinadef", sep=';', index_col=1, encoding='latin-1')
+    if df_sinadef is None:
+        print("No sinadef changes detected")
+    else:
+        print("sinadef data loaded into memory successfully. Use df_sinadef variable to access them")
 
 
 if __name__ == "__main__":
