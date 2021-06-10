@@ -18,9 +18,9 @@ jobs:
     - name: Install Python dependencies
       run: |
         pip install -r requirements.txt
-    - name: Load dataset only if changes detected
+    - name: Load dataset only if changes detected + Processing
       run: |
-        python loader.py
+        python runner.py
     - name: Commit and push
       uses: actions-js/push@master
       with:
