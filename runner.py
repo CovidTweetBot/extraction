@@ -1,5 +1,6 @@
 from loader import DataLoader
 from processors import apply_processing
+from visualizations import generate_visualizations
 
 
 def main():
@@ -18,6 +19,7 @@ def main():
     else:
         print("sinadef data loaded into memory successfully. Use df_sinadef variable to access them")
         apply_processing(df_sinadef)
+        generate_visualizations()
 
 
 if __name__ == "__main__":
