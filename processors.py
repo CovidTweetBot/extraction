@@ -1,10 +1,7 @@
-import os
+import pathlib
 from datetime import datetime
 
 import pandas as pd
-
-
-RESULTS_OUTPUT_PATH = "./output/results"
 
 
 def quitar_no_años(row):
@@ -50,10 +47,12 @@ def sinadef_por_semana(df, columna):
 
 
 def apply_processing(df):
+    output_path = pathlib.Path("./output")
+    results_path = output_path / "results"
     df = sinadef_normalize(df)
     lista = ['SEXO', 'Edad_fallecimiento', 'DEPARTAMENTO']
     for columna in lista:
         data_frame = sinadef_por_dia(df, columna)
-        data_frame.to_csv(os.path.join(RESULTS_OUTPUT_PATH, f'Por_dia_{columna}.csv'))
+        data_frame.to_csv(results_path / f'Por_dia_{columna}.csv')
         data_frame_semana = sinadef_por_semana(df, columna)
-        data_frame_semana.to_csv(os.path.join(RESULTS_OUTPUT_PATH, f'Por_semana_{columna}.csv'))
+        data_frame_semana.to_csv(results_path / f'Por_semana_{columna}.csv')

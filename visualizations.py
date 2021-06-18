@@ -1,12 +1,7 @@
-import os
+import pathlib
 
 import pandas as pd
 import plotly.graph_objects as go
-
-from processors import RESULTS_OUTPUT_PATH
-
-
-IMAGES_OUTPUT_PATH = "./output/images"
 
 
 def scatter_plot(csv_file):
@@ -34,11 +29,12 @@ def scatter_plot(csv_file):
 
 
 def generate_visualizations():
-    if not os.path.exists(IMAGES_OUTPUT_PATH):
-        os.mkdir(IMAGES_OUTPUT_PATH)
-    arr = os.listdir(RESULTS_OUTPUT_PATH)
-    for file in arr:
-        if file.endswith(".csv"):
-            fig = scatter_plot(os.path.join(RESULTS_OUTPUT_PATH, file))
-            fig_name = file.replace(".csv", "")
-            fig.write_image(os.path.join(IMAGES_OUTPUT_PATH, f"{fig_name}.png"))
+    output_path = pathlib.Path("./output")
+    results_path = output_path / "results"
+    images_path = output_path / "images"
+    if not images_path.exists():
+        images_path.mkdir()
+    for file in results_path.glob("*.csv"):
+        fig = scatter_plot(file)
+        write_to = images_path / f"{file.stem}.png"
+        fig.write_image(str(write_to))
