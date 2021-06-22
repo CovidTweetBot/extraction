@@ -635,3 +635,5 @@
 2021-06-22 16:29:16; Source=sinadef; Content-Length=23330754
 2021-06-22 17:30:24; Source=vaccinations; Content-Length=792819827
 2021-06-22 17:30:25; Source=sinadef; Content-Length=23330754
+2021-06-22 18:20:47; Source=vaccinations; Content-Length=792819827
+2021-06-22 18:20:50; Source=sinadef; Content-Length=23330754
