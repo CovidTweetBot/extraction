@@ -1939,3 +1939,5 @@
 2021-07-20 16:27:58; Source=sinadef; Content-Length=23744641
 2021-07-20 17:22:57; Source=vaccinations; Content-Length=1358385585
 2021-07-20 17:22:58; Source=sinadef; Content-Length=23744641
+2021-07-20 18:21:54; Source=vaccinations; Content-Length=1358385585
+2021-07-20 18:21:58; Source=sinadef; Content-Length=23744641
